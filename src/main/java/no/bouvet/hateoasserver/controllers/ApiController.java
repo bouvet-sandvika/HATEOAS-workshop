@@ -1,13 +1,16 @@
 package no.bouvet.hateoasserver.controllers;
 
+import static org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType.HAL;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@EnableHypermediaSupport(type = HAL)
 public class ApiController {
 
     @GetMapping("/api")

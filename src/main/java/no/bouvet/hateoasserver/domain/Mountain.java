@@ -1,8 +1,8 @@
 package no.bouvet.hateoasserver.domain;
 
-import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.RepresentationModel;
 
-public class Mountain extends EntityModel<Mountain> {
+public class Mountain extends RepresentationModel<Mountain> {
     private String name;
     private Integer height;
 

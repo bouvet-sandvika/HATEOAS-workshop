@@ -1,11 +1,13 @@
 package no.bouvet.hateoasserver.controllers;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.util.Arrays;
 import java.util.Collection;
 
 import no.bouvet.hateoasserver.domain.Mountain;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BouvetIslandController {
 
     @GetMapping("/api/mountains")
-    public CollectionModel<EntityModel<Mountain>> getMountains() {
+    public CollectionModel<Mountain> getMountains() {
         Mountain mountain1 = new Mountain();
         mountain1.setHeight(780);
         mountain1.setName("Olavtoppen");
@@ -22,8 +24,9 @@ public class BouvetIslandController {
         mountain2.setHeight(665);
         mountain2.setName("Skoddenuten");
 
-        Collection<EntityModel<Mountain>> mountains = Arrays.asList(EntityModel.of(mountain1), EntityModel.of(mountain2));
-        CollectionModel<EntityModel<Mountain>> mountainCollectionModel = CollectionModel.of(mountains);
+        Collection<Mountain> mountains = Arrays.asList(mountain1, mountain2);
+        CollectionModel<Mountain> mountainCollectionModel = CollectionModel.of(mountains);
+        mountainCollectionModel.add(linkTo(methodOn(BouvetIslandController.class).getMountains()).withSelfRel());
         return mountainCollectionModel;
     }
 }
